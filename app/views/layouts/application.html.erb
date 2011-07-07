@@ -19,6 +19,9 @@
       <a href="http://www.../faq."> Questions </a><br/>
       <a href="http://www..../news"> News </a><br/>
       <a href="http://www..../contact"> Contact </a><br/>
+      <% if session[:count] > 5 %>
+        <p>You've seen the store <%= pluralize session[:count], 'time' %> </p>
+      <% end %>
     </div>
     <div id="main">
       <%= yield %>
