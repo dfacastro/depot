@@ -44,7 +44,7 @@ class LineItemsController < ApplicationController
     session[:count] = 0
     @cart = current_cart
     product = Product.find(params[:product_id])
-    @line_item = @cart.line_items.build(:product => product)
+    @line_item = @cart.add_product(product.id)   #@cart.line_items.build(:product => product)
     #@line_item = LineItem.new(params[:line_item])
 
     respond_to do |format|
@@ -81,7 +81,7 @@ class LineItemsController < ApplicationController
     @line_item.destroy
 
     respond_to do |format|
-      format.html { redirect_to(line_items_url) }
+      format.html { redirect_to( @line_item.cart, :notice => 'Item removed from cart.' ) }     #line_items_url) }
       format.xml  { head :ok }
     end
   end

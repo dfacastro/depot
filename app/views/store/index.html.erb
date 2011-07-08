@@ -7,6 +7,9 @@
 <% end %>
 
 <h1> Your Pragmatic catalog </h1>
+      <% if session[:count] > 5 %>
+        <p>You've seen the store <%= pluralize session[:count], 'time' %> </p>
+      <% end %>
 
 <% @products.each do |product| %>
 
