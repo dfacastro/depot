@@ -6,3 +6,7 @@ page[:current_item].visual_effect :grow if @new
 page[:current_item].visual_effect :highlight,
                                   :start_color => "#88ff88",
                                   :endcolor => "#114411"
+
+#page[:notice].hide
+
+page.select('#notice').each {|notice| notice.hide}
