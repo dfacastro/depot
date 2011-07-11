@@ -1,9 +1,13 @@
 Depot::Application.routes.draw do
+  
+  match "line_items/dec_quantity", :to => 'line_items#dec_quantity', :method => :post
   resources :line_items
 
   resources :carts
 
   get "store/index"
+  match "store/dec_quantity", :to => 'store#dec_quantity'
+  
 
   resources :products
 

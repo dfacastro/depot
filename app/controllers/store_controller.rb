@@ -4,5 +4,4 @@ class StoreController < ApplicationController
     @cart = current_cart
     inc_count
   end
-
 end

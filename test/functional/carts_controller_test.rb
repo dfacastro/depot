@@ -47,4 +47,17 @@ class CartsControllerTest < ActionController::TestCase
 
     assert_redirected_to store_path #carts_path
   end
+
+  #added
+  test "should empty cart via ajax" do
+    assert_difference('Cart.count', -1) do
+      session[:cart_id] = @cart.id
+      xhr :delete, :destroy, :id => @cart.to_param
+    end
+
+    assert_response :success
+    #assert_select '#cart', :count => 0
+    #assert_select '#cart', false, "This page must not contain cart"
+    
+  end
 end

@@ -183,3 +183,10 @@
     border-bottom: 1px dotted #595;
     margin-bottom: 10px;
 }
+
+
+#store .product_picture {
+  width: 75px;
+  float: left;
+  text-decoration: none;
+}

@@ -21,4 +21,15 @@ class Cart < ActiveRecord::Base
     line_items.sum(:quantity)
   end
 
+  def dec_quantity(line)
+    if line.quantity > 1
+      line.quantity -= 1
+      line.save
+      line
+    else
+      line.destroy
+      false
+    end
+  end
+
 end

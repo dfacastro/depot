@@ -44,14 +44,20 @@ class LineItemsController < ApplicationController
     session[:count] = 0
     @cart = current_cart
     product = Product.find(params[:product_id])
+
+    @new_item = false
+    @new_item = true unless @cart.line_items.find_by_product_id(product.id)
+
     @line_item = @cart.add_product(product.id)   #@cart.line_items.build(:product => product)
     #@line_item = LineItem.new(params[:line_item])
+
 
     respond_to do |format|
       if @line_item.save
         #format.html { redirect_to(@line_item.cart, :notice => 'Line item was successfully created.') }
         format.html { redirect_to store_url }
-        format.js { @current_item = @line_item }
+        format.js { @current_item = @line_item
+                    @new = @new_item}
         format.xml  { render :xml => @line_item, :status => :created, :location => @line_item }
       else
         format.html { render :action => "new" }
@@ -86,6 +92,21 @@ class LineItemsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to( cart_url(session[:cart_id]), :notice => 'Item removed from cart.' ) }     #line_items_url) }
       format.xml  { head :ok }
+    end
+  end
+
+
+  def dec_quantity
+    @cart = current_cart
+
+    @line_item = @cart.dec_quantity(@cart.line_items.find(params[:id]))
+
+    respond_to do |format|
+      
+    format.html { redirect_to( store_url ) }
+    format.js {@current_item = @line_item}
+    format.xml { head :ok }
+
     end
   end
 end
