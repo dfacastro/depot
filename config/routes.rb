@@ -11,7 +11,9 @@ Depot::Application.routes.draw do
   match "store/dec_quantity", :to => 'store#dec_quantity'
   
 
-  resources :products
+  resources :products do
+    get :who_bought, :on => :member #o método é chamado sobre um membro do controlador (produto)
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
