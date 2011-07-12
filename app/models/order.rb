@@ -2,7 +2,12 @@ class Order < ActiveRecord::Base
 
   has_many :line_items, :dependent => :destroy
 
-  PAYMENT_TYPES = PaymentType::ALL # ["Check", "Credit Card", "Purchase Order"]
+  #PAYMENT_TYPES = PaymentType::ALL # ["Check", "Credit Card", "Purchase Order"]
+  if PaymentType::ALL.count > 0
+    PAYMENT_TYPES = PaymentType::ALL
+  else
+    PAYMENT_TYPES = ["Check", "Credit Card", "Purchase Order"]
+  end
 
   validates :name, :email, :pay_type, :address, :presence => true
   validates :pay_type, :inclusion => PAYMENT_TYPES
