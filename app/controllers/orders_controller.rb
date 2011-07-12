@@ -36,6 +36,7 @@ class OrdersController < ApplicationController
     end
 
     @order = Order.new
+    @checking_out = true
 
     respond_to do |format|
       format.html # new.html.erb
