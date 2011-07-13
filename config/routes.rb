@@ -15,6 +15,8 @@ Depot::Application.routes.draw do
     get :who_bought, :on => :member #o método é chamado sobre um membro do controlador (produto)
   end
 
+  post "orders/ship_order"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

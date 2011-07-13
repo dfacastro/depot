@@ -6,6 +6,7 @@
     <th>Address</th>
     <th>Email</th>
     <th>Pay type</th>
+    <th>Shipped On</th>
     <th></th>
     <th></th>
     <th></th>
@@ -17,9 +18,13 @@
     <td><%= order.address %></td>
     <td><%= order.email %></td>
     <td><%= order.pay_type %></td>
+    <td><%= order.ship_date %></td>
     <td><%= link_to 'Show', order %></td>
     <td><%= link_to 'Edit', edit_order_path(order) %></td>
     <td><%= link_to 'Destroy', order, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% unless order.ship_date %>
+      <td><%= link_to 'Ship', {:action => :ship_order, :id => order.id}, :method => :post %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>

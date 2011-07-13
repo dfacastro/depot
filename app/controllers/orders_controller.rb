@@ -100,4 +100,26 @@ class OrdersController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def ship_order
+    @order = Order.find(params[:id])
+
+    if @order.ship_date
+      respond_to do |format|
+        format.html { redirect_to store_url, :notice => 'The chosen order has already been shipped' }
+        format.xml { head :ok }
+      end
+      return
+    end
+
+    @order.ship_date = Time.now
+    @order.save
+
+    Notifier.order_shipped(@order).deliver
+
+    respond_to do |format|
+      format.html { redirect_to store_url, :notice => "#{@order.name}'s order has been shipped."}
+      format.xml { head :ok }
+    end
+  end
 end
