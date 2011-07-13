@@ -1,5 +1,7 @@
 Depot::Application.routes.draw do
   
+  resources :users
+
   resources :orders
 
   match "line_items/dec_quantity", :to => 'line_items#dec_quantity', :method => :post
