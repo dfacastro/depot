@@ -1,4 +1,21 @@
 Depot::Application.routes.draw do
+=begin
+  get "admin/index"
+
+  get "sessions/new"
+
+  get "sessions/create"
+
+  get "sessions/destroy"
+=end
+
+  get 'admin' => 'admin#index'
+
+  controller :sessions do
+    get 'login' => :new
+    post 'login' => :create
+    delete 'logout' => :destroy
+  end
   
   resources :users
 
@@ -10,7 +27,7 @@ Depot::Application.routes.draw do
   resources :carts
 
   get "store/index"
-  match "store/dec_quantity", :to => 'store#dec_quantity'
+  #match "store/dec_quantity", :to => 'store#dec_quantity'
   
 
   resources :products do
