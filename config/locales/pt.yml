@@ -29,3 +29,36 @@ pt:
         separator:  ","
         delimiter:  "."
         format:     "%u&nbsp;%n"
+
+  orders:
+    new:
+      legend: "Por favor, preencha os campos"
+    form:
+      name:             "Nome"
+      address_html:     "Endereço"
+      email:            "E-mail"
+      pay_type_html:    "Pagar&nbsp;com"
+      pay_prompt_html:  "Escolha um método de pagamento"
+      submit:           "Realizar pedido"
+
+  activerecord:
+    errors:
+      messages:
+        inclusion: "não está incluído na lista"
+        blank: "nao pode ficar em branco"
+    models:
+      order: "pedido"
+    attributes:
+      order:
+        address: "Endereço"
+        name: "Nome"
+        email: "E-mail"
+        pay_type: "Forma de pagamento"
+  errors:
+    template:
+      body: "Existem problemas com os seguintes campos:"
+      header:
+        one: "1 erro impediu que este %{model} fosse guardado"
+        other: "%{count} erros impediram que este %{model} fosse guardado"
+
+  thanks: "Obrigado pelo seu pedido"
