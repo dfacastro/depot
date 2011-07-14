@@ -16,25 +16,32 @@ Depot::Application.routes.draw do
     post 'login' => :create
     delete 'logout' => :destroy
   end
-  
-  resources :users
 
-  resources :orders
+  #locale
+  scope '(:locale)' do
+    resources :users
 
-  match "line_items/dec_quantity", :to => 'line_items#dec_quantity', :method => :post
-  resources :line_items
+    match "orders/ship_order", :to => 'orders#ship_order', :method => :post
+    resources :orders
 
-  resources :carts
+    match "line_items/dec_quantity", :to => 'line_items#dec_quantity', :method => :post
+    resources :line_items
 
-  get "store/index"
-  #match "store/dec_quantity", :to => 'store#dec_quantity'
-  
+    resources :carts
 
-  resources :products do
-    get :who_bought, :on => :member #o método é chamado sobre um membro do controlador (produto)
+    #get "store/index"
+    #match "store/dec_quantity", :to => 'store#dec_quantity'
+
+
+    resources :products do
+      get :who_bought, :on => :member #o método é chamado sobre um membro do controlador (produto)
+    end
+
+    
+
+    root :to => 'store#index', :as => 'store'
   end
-
-  post "orders/ship_order"
+  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -87,7 +94,7 @@ Depot::Application.routes.draw do
   # just remember to delete public/index.html.
   # root :to => "welcome#index"
 
-  root :to => 'store#index', :as => 'store'
+  #root :to => 'store#index', :as => 'store'
 
   # See how all your routes lay out with "rake routes"
 
