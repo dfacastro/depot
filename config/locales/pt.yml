@@ -1,0 +1,31 @@
+pt:
+  hello: "Olá Mundo"
+
+  layouts:
+    application:
+      title:      "Publicações Pragmatic"
+      home:       "Início"
+      questions:  "Questões"
+      news:       "Notícias"
+      contact:    "Contacto"
+
+
+  store:
+    index:
+      title_html: "O teu catálogo Pragmático"
+      add_html:   "Adicionar ao carrinho"
+
+  carts:
+    cart:
+      title:      "Carrinho"
+      empty:      "Esvaziar"
+      checkout:   "Comprar"
+
+  number:
+    currency:
+      format:
+        unit:       "$US"
+        precision:  2
+        separator:  ","
+        delimiter:  "."
+        format:     "%u&nbsp;%n"
