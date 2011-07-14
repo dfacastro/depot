@@ -2,6 +2,8 @@ require 'digest/sha2'
 
 class User < ActiveRecord::Base
 
+  after_destroy :ensure_an_admin_remains
+
   validates :name, :presence => true, :uniqueness => true
 
   validates :password, :confirmation => true #checks if the "type your pw" and "re-type your pw" fields match
@@ -38,6 +40,13 @@ class User < ActiveRecord::Base
       if user.hashed_password == encrypt_password(password, user.salt)
         user
       end
+    end
+  end
+
+  #raise an ActiveRecord::Rollback exception instead in order not to pass this to the controller
+  def ensure_an_admin_remains
+    if User.count.zero?
+      "raise Can't delete last user"
     end
   end
 
