@@ -6,6 +6,15 @@ class ShippingOrdersTest < ActionDispatch::IntegrationTest
   test "shipping an order" do
     order = orders(:one)
 
+    # login
+    get "login"
+    assert_response :success
+    assert_template "new"
+
+    post_via_redirect "login", :name => users(:one).name, :password => 'secret'
+    assert_response :success
+    assert_template "/"
+
     # visit the orders page
     get "/orders"
     assert_response :success

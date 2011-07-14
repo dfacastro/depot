@@ -5,6 +5,15 @@ class ErrorsTest < ActionDispatch::IntegrationTest
 
   # Replace this with your real tests.
   test "accessing invalid cart" do
+    
+    # login
+    get "login"
+    assert_response :success
+    assert_template "new"
+
+    post_via_redirect "login", :name => users(:one).name, :password => 'secret'
+    assert_response :success
+    assert_template "/"
 
     # access cart with id = wibble
     get_via_redirect "/carts/wibble"
