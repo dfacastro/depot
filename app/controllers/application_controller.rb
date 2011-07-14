@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
 
   protected
     def authorize
-      unless User.find_by_id(session[:user_id])
+      unless User.find_by_id(session[:user_id]) or (session[:user_id] and User.count.zero?)
         redirect_to login_url, :notice => "Please log in"
       end
     end
