@@ -1,6 +1,7 @@
 class Order < ActiveRecord::Base
 
   has_many :line_items, :dependent => :destroy
+  has_many :products, :through => :line_items
 
   #PAYMENT_TYPES = PaymentType::ALL # ["Check", "Credit Card", "Purchase Order"]
   if PaymentType::ALL.count > 0

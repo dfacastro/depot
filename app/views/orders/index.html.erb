@@ -25,6 +25,7 @@
     <% unless order.ship_date %>
       <td><%= link_to 'Ship', {:action => :ship_order, :id => order.id, :method => :post} %></td>
     <% end %>
+    <td><%= link_to 'PDF', {:action => :pdf, :id => order.id, :method => :get} %></td>
   </tr>
 <% end %>
 </table>

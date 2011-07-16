@@ -1,3 +1,6 @@
+#require 'pdf/writer'
+require 'pdfkit'
+
 class OrdersController < ApplicationController
   skip_before_filter :authorize, :only => [:new, :create]
 
@@ -123,5 +126,21 @@ class OrdersController < ApplicationController
       format.html { redirect_to store_url, :notice => "#{@order.name}'s order has been shipped."}
       format.xml { head :ok }
     end
+  end
+
+  def pdf
+    @order = Order.find(params[:id])
+
+    rnd = render_to_string('_pdf', :layout => false)
+    kit = PDFKit.new(rnd, :page_size => 'Letter')
+    #kit.stylesheets << "#{Rails.root}/public/stylesheets/depot.css"
+    send_data(kit.to_pdf, :filename => "order_no_#{@order.id}.pdf", :type => 'application/pdf', :disposition => 'inline')
+
+=begin
+    _p = PDF::Writer.new
+    _p.select_font 'Times-Roman'
+    _p.text "Hello, Ruby.", :font_size => 72, :justification => :center
+    send_data _p.render, :filename => 'lol.pdf', :type => "application/pdf"
+=end
   end
 end

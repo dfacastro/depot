@@ -22,6 +22,7 @@ Depot::Application.routes.draw do
     resources :users
 
     match "orders/ship_order", :to => 'orders#ship_order', :method => :post
+    match "orders/pdf", :to => 'orders#pdf', :method => :get
     resources :orders
 
     match "line_items/dec_quantity", :to => 'line_items#dec_quantity', :method => :post
